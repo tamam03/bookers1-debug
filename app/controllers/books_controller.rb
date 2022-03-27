@@ -3,8 +3,11 @@ class BooksController < ApplicationController
   end
 
   def index
+
     @books = Book.all
     @book = Book.new
+    book = @book.id
+
   end
 
   def create
@@ -27,8 +30,8 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    if @book.update()
-      flash[:notice] = "Book was successfully updated."
+    if @book.update(book_params)
+      flash[:success] = "Book was successfully updated."
       redirect_to book_path(@book.id)
     else
       render :edit
